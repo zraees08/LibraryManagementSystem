@@ -1,0 +1,56 @@
+import java.util.ArrayList;
+// The User class represents a user in the library system, with attributes such as ID, name, contact information, and a list of borrowed books.
+public class User{
+    private int ID;
+    private int contactInfo;
+    private String name;
+    private ArrayList<Book> borrowedBooks;
+
+    // Constructor to initialize a User object with provided attributes.
+    public User(int ID, String name, int contactInfo) {
+        this.ID = ID;
+        this.name = name;
+        this.contactInfo = contactInfo;
+        this.borrowedBooks = new ArrayList<>();
+    }
+
+    // Getter
+    public int getID() {
+        return ID;
+    }
+
+    // Setter
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    // Getter
+    public String getName() {
+        return name;
+    }
+
+    // Setter
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Getter
+    public int getContactInfo() {
+        return contactInfo;
+    }
+
+    // Setter
+    public void setContactInfo(int contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+
+    // Getter for ArrayList
+    public ArrayList<Book> getBorrowedBooks() {
+        return borrowedBooks;
+    }
+
+    // Setter for ArrayList
+    public void setBorrowedBooks(ArrayList<Book> borrowedBooks) {
+        this.borrowedBooks = borrowedBooks;
+    }
+}
