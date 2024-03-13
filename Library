@@ -1,0 +1,207 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+// The Library class manages books and users in a library system.
+public class Library{
+    private static ArrayList<Book> books;    // List to store books in the library
+    private static ArrayList<User> users;    // List to store users in the library
+
+    // Constructor to initialize empty lists when a Library object is created.
+    public Library(){
+        this.books = new ArrayList<>();
+        this.users = new ArrayList<>();
+
+    }
+    // Method to add a new book to the library.
+    public static void addBook(int ID, String title, String author, String genre, boolean availabilityStatus){
+        Book newBook = new Book(ID, title, author, genre, availabilityStatus);
+        books.add(newBook);
+        System.out.println("Book added successfully.");
+    }
+    // Method to add a new user to the library.
+    public static void addUser(int ID, String name, int contactInfo){
+        User newUser = new User(ID, name, contactInfo);
+        users.add(newUser);
+        System.out.println("User added successfully.");
+    }
+    // Method to check out a book for a user.
+    public static void bookCheckOut(int userID, String bookName){
+        for (Book book : books){
+
+            if (userID == book.getID() && bookName.equals(book.getTitle()) && book.getAvailabilityStatus()){
+                System.out.println("Book borrowed successfully!");
+                book.setAvailabilityStatus(false);
+
+                users.get(userID).getBorrowedBooks().add(book);
+                return;
+            }
+        }
+        System.out.println("Unable to borrow the book. Please check user ID, book name or availability. Try again later:)");
+
+    }
+     // Method to return a book to the library.
+    public static void returnBook(int userID, String returnBook){
+        for (Book book : books) {
+            if (userID == book.getID() && returnBook.equals(book.getTitle())){
+                System.out.println("Book returned successfully by user id "+ userID + "  " + returnBook );
+                users.get(userID).getBorrowedBooks().remove(book);
+                return;
+            }
+        }
+        System.out.println("Unable to return the book. Please check user ID, book name. Try again later:)");
+    }
+
+    // Method to display the list of books in the library.
+    public static void displayBook(){
+        System.out.println("List of Books:");
+        for (Book book : books) {
+            System.out.println("ID: " + book.getID() + ", Title: " + book.getTitle() +
+                    ", Author: " + book.getAuthor() + ", Genre: " + book.getGenre() +
+                    ", Availability: " + book.getAvailabilityStatus());
+        }
+    }
+    // Method to search for a book by title and return the book object.
+    public static Book searchBookbyTitle(String title){
+        for (Book book : books){
+            if (title.equals(book.getTitle())) {
+                return book;
+            }
+        }
+        return null;
+    }
+    // Method to search for a book by ID and return the book object.
+    public static Book searchBookbyID(int id){
+        for (Book book : books){
+            if (id == book.getID()) {
+                return book;
+            }
+        }
+        return null;
+
+    }
+    // Main method to run the library management system.
+    public static void main(String[] args){
+        boolean running = true;
+
+        Scanner input = new Scanner(System.in);
+
+
+        while(running){
+            // Display the main menu of the library management system.
+            System.out.println("Welcome to your Library Management System!");
+            System.out.println("MENU:");
+            System.out.println("1. Add book");
+            System.out.println("2. Add user");
+            System.out.println("3. Check out book");
+            System.out.println("4. Return book");
+            System.out.println("5. Display books");
+            System.out.println("6. Search book by book title or by author");
+            System.out.println("7. Exit program");
+
+            System.out.println("What task do you want to perform? ");
+            int option = input.nextInt();
+
+          // Handling option 6 for searching books by title or ID.
+            if (option == 6){
+                System.out.println("1. Search book by book title.");
+                System.out.println("2. Search book by book ID.");
+                System.out.println("What task do you want to perform? ");
+                int searchOption = input.nextInt();
+
+                switch (searchOption){
+                    case 1:
+                    {
+                        // Searching for a book by title.
+                        System.out.println("Which book do you want to search for? Enter title of book:");
+                        String title = input.nextLine();
+                        Library.searchBookbyTitle(title);
+                    }
+                    case 2:
+                    {
+                        // Searching for a book by ID.
+                        System.out.println("Which book do you want to search for? Enter ID of book:");
+                        int id = input.nextInt();
+                        Library.searchBookbyID(id);
+                    }
+                }
+
+            }
+            // Handling other options in the main menu.
+            switch(option){
+                case 1:
+                {
+                    // Collecting book information from the user.
+                    System.out.println("Enter ID of the book:");
+                    int ID = input.nextInt();
+                    System.out.println("Enter name of the book:");
+                    String title = input.nextLine();
+                    System.out.println("Enter author of the book:");
+                    String author = input.nextLine();
+                    System.out.println("Enter genre of the book:");
+                    String genre = input.nextLine();
+                    System.out.println("Enter availability status of the book:");
+                    boolean availabilityStatus = Boolean.parseBoolean(input.nextLine());
+
+                    // Adding the book to the library.
+                    Library.addBook(ID, title, author, genre, availabilityStatus);
+                    break;
+                }
+
+                case 2:
+                {
+                    // Collecting user information from the user.
+                    System.out.println("Enter ID of user: ");
+                    int id = input.nextInt();
+                    System.out.println("Enter name of user: ");
+                    String name = input.nextLine();
+                    System.out.println("Enter contact no of user: ");
+                    int contactInfo = input.nextInt();
+
+                    // Adding the user to the library.
+                    Library.addUser(id, name, contactInfo);
+                    break;
+                }
+                case 3:
+                {
+                    // Collecting information for checking out a book.
+                    System.out.println("Enter your user ID:");
+                    int userID = input.nextInt();
+                    System.out.println("Whick book do you want to check out?");
+                    String bookName = input.nextLine();
+
+                    // Checking out the book.
+                    bookCheckOut(userID, bookName);
+                    break;
+                }
+                case 4:
+                {
+                    // Collecting information for returning a book.
+                    System.out.println("Enter user ID:");
+                    int userID = input.nextInt();
+
+                    System.out.println("Which book do you want to return?");
+                    String returnBook = input.nextLine();
+                    // Returning the book.
+                    returnBook(userID, returnBook);
+                    break;
+
+                }
+                case 5:
+                {
+                    Library.displayBook();
+                    break;
+                }
+                // Option 7: Exit the program.
+                case 7:
+                    running = false;
+                    System.out.println("Exiting the Library Management System. Goodbye!");
+                default:
+                {
+                    System.out.println("Invalid option. Please choose a valid option.");
+                    break;
+
+                }
+            }
+        }
+        input.close();
+    }
+}
