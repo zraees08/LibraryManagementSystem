@@ -14,12 +14,21 @@ public class Library{
     // Method to add a new book to the library.
     public static void addBook(int ID, String title, String author, String genre, boolean availabilityStatus){
         Book newBook = new Book(ID, title, author, genre, availabilityStatus);
+        if (books == null) {
+            // If books is null, initialize it
+            books = new ArrayList<>();
+        }
         books.add(newBook);
         System.out.println("Book added successfully.");
+
     }
     // Method to add a new user to the library.
     public static void addUser(int ID, String name, int contactInfo){
         User newUser = new User(ID, name, contactInfo);
+        if (users == null) {
+            // If users is null, initialize it
+            users = new ArrayList<>();
+        }
         users.add(newUser);
         System.out.println("User added successfully.");
     }
@@ -99,6 +108,7 @@ public class Library{
 
             System.out.println("What task do you want to perform? ");
             int option = input.nextInt();
+            input.nextLine();
 
           // Handling option 6 for searching books by title or ID.
             if (option == 6){
@@ -106,6 +116,7 @@ public class Library{
                 System.out.println("2. Search book by book ID.");
                 System.out.println("What task do you want to perform? ");
                 int searchOption = input.nextInt();
+                input.nextLine();
 
                 switch (searchOption){
                     case 1:
@@ -114,6 +125,7 @@ public class Library{
                         System.out.println("Which book do you want to search for? Enter title of book:");
                         String title = input.nextLine();
                         Library.searchBookbyTitle(title);
+                        break;
                     }
                     case 2:
                     {
@@ -121,6 +133,7 @@ public class Library{
                         System.out.println("Which book do you want to search for? Enter ID of book:");
                         int id = input.nextInt();
                         Library.searchBookbyID(id);
+                        break;
                     }
                 }
 
@@ -132,6 +145,7 @@ public class Library{
                     // Collecting book information from the user.
                     System.out.println("Enter ID of the book:");
                     int ID = input.nextInt();
+                    input.nextLine();
                     System.out.println("Enter name of the book:");
                     String title = input.nextLine();
                     System.out.println("Enter author of the book:");
@@ -151,6 +165,7 @@ public class Library{
                     // Collecting user information from the user.
                     System.out.println("Enter ID of user: ");
                     int id = input.nextInt();
+                    input.nextLine();
                     System.out.println("Enter name of user: ");
                     String name = input.nextLine();
                     System.out.println("Enter contact no of user: ");
@@ -165,7 +180,8 @@ public class Library{
                     // Collecting information for checking out a book.
                     System.out.println("Enter your user ID:");
                     int userID = input.nextInt();
-                    System.out.println("Whick book do you want to check out?");
+                    input.nextLine();
+                    System.out.println("Which book do you want to check out?");
                     String bookName = input.nextLine();
 
                     // Checking out the book.
@@ -177,6 +193,7 @@ public class Library{
                     // Collecting information for returning a book.
                     System.out.println("Enter user ID:");
                     int userID = input.nextInt();
+                    input.nextLine();
 
                     System.out.println("Which book do you want to return?");
                     String returnBook = input.nextLine();
