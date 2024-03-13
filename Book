@@ -1,0 +1,64 @@
+// The Book class represents a book in the library, with attributes such as ID, title, author, genre, and availability status.
+public class Book{
+    private int ID;
+    private String title, author, genre;
+    private boolean availabilityStatus;
+
+    // Constructor to initialize a Book object with provided attributes.
+    public Book(int ID, String title, String author, String genre, boolean availabilityStatus){
+        this.ID = ID;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.availabilityStatus = availabilityStatus;
+    }
+    // Getter
+    public int getID() {
+        return ID;
+    }
+
+    // Setter
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    // Getter
+    public String getTitle() {
+        return title;
+    }
+
+    // Setter
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    // Getter
+    public String getAuthor() {
+        return author;
+    }
+
+    // Setter
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    // Getter
+    public String getGenre() {
+        return genre;
+    }
+
+    // Setter
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    // Getter
+    public boolean getAvailabilityStatus() {
+        return availabilityStatus;
+    }
+
+    // Setter
+    public void setAvailabilityStatus(boolean availabilityStatus) {
+        this.availabilityStatus = availabilityStatus;
+    }
+}
